@@ -5,10 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="BE\" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Macross.Json.Extensions" Version="2.2.0" />
+    <ProjectReference Include="..\CommonStuff\CommonStuff.csproj" />
   </ItemGroup>
+
 </Project>
