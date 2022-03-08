@@ -26,13 +26,15 @@ namespace ConsoleSearch
 
                 var query = input.Split(" ", StringSplitOptions.RemoveEmptyEntries);
 
-                Console.WriteLine(string.Format("https://localhost:5001/search/{0}", query));
                 var response = _client.GetAsync( string.Format("https://localhost:5001/search/{0}", query));
 
                 string result = (response.Result.Content.ReadAsStringAsync().Result);
 
-
-                SearchResult resultObject = JsonSerializer.Deserialize<SearchResult>(result);
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                SearchResult resultObject = JsonSerializer.Deserialize<SearchResult>(result, options);
 
                 if (resultObject.Ignored.Count > 0) {
                     Console.WriteLine("Ignored: ");

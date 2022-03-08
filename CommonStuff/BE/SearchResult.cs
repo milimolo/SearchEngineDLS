@@ -16,11 +16,11 @@ namespace ConsoleSearch
     {
         //[JsonConstructor]
         //public SearchResult() { }
-        public SearchResult(String[] query, int hits, List<DocumentHit> documents, List<string> ignored, TimeSpan timeUsed)
+        public SearchResult(String[] query, int hits, List<DocumentHit> documentHits, List<string> ignored, TimeSpan timeUsed)
         {
             Query = query;
             Hits = hits;
-            DocumentHits = documents;
+            DocumentHits = documentHits;
             Ignored = ignored;
             TimeUsed = timeUsed;
         }

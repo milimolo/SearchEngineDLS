@@ -5,9 +5,9 @@ namespace ConsoleSearch
 {
     public class DocumentHit
     {
-        public DocumentHit(BEDocument doc, int noOfHits)
+        public DocumentHit(BEDocument document, int noOfHits)
         {
-            Document = doc;
+            Document = document;
             NoOfHits = noOfHits;
         }
 
