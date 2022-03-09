@@ -15,10 +15,10 @@ namespace ConsoleSearch
 
         [HttpGet]
         [Route("{query}")]
-        public IActionResult GetSearchResult([FromQuery] string[] query)
+        public ActionResult<SearchResult> GetSearchResult( string query)
         {
-            //string[] array = new string[1] { "the" };
-            return Ok(mSearchLogic.Search(query, 10));
+            //string[] array = new string[2] { "the", "peter" };
+            return Ok(mSearchLogic.Search(query.Split(","), 10));
         }
     }
 }

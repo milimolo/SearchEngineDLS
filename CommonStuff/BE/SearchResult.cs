@@ -25,15 +25,15 @@ namespace ConsoleSearch
             TimeUsed = timeUsed;
         }
 
-        public String[] Query { get;  }
+        public String[] Query { get; set; }
 
-        public int Hits { get; }
+        public int Hits { get; set; }
 
-        public List<DocumentHit> DocumentHits { get;  }
+        public List<DocumentHit> DocumentHits { get; set; }
 
-        public List<string> Ignored { get; }
+        public List<string> Ignored { get; set; }
 
         [JsonConverter(typeof(JsonTimeSpanConverter))]
-        public TimeSpan TimeUsed { get;  }
+        public TimeSpan TimeUsed { get; set; }
     }
 }

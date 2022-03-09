@@ -16,7 +16,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Database", "Database\Database.csproj", "{FDE3F659-BE0E-475F-8143-ABE0D653C03A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchesApi", "SearchesApi\SearchesApi.csproj", "{89F83F8F-A447-49CC-8EED-D76431742958}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SearchesApi", "SearchesApi\SearchesApi.csproj", "{89F83F8F-A447-49CC-8EED-D76431742958}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadBalanceTester", "LoadBalanceTester\LoadBalanceTester.csproj", "{92657ACF-0764-4BE6-9C3F-7A6059DFB6D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,6 +46,10 @@ Global
 		{89F83F8F-A447-49CC-8EED-D76431742958}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89F83F8F-A447-49CC-8EED-D76431742958}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89F83F8F-A447-49CC-8EED-D76431742958}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92657ACF-0764-4BE6-9C3F-7A6059DFB6D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92657ACF-0764-4BE6-9C3F-7A6059DFB6D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92657ACF-0764-4BE6-9C3F-7A6059DFB6D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92657ACF-0764-4BE6-9C3F-7A6059DFB6D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -11,8 +11,8 @@ namespace ConsoleSearch
             NoOfHits = noOfHits;
         }
 
-        public BEDocument Document { get;  }
+        public BEDocument Document { get; set; }
 
-        public int NoOfHits { get;  }
+        public int NoOfHits { get; set; }
     }
 }

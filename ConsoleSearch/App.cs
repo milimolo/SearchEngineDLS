@@ -26,32 +26,28 @@ namespace ConsoleSearch
 
                 var query = input.Split(" ", StringSplitOptions.RemoveEmptyEntries);
 
-                var response = _client.GetAsync( string.Format("https://localhost:5001/search/{0}", query));
+                var response = _client.GetAsync("https://localhost:44395/search/"+ string.Join(",", query));
 
                 string result = (response.Result.Content.ReadAsStringAsync().Result);
 
-                var options = new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                };
-                SearchResult resultObject = JsonSerializer.Deserialize<SearchResult>(result, options);
+                var searchResult = JsonSerializer.Deserialize<SearchResult>(result);
 
-                if (resultObject.Ignored.Count > 0) {
+                if (searchResult.Ignored.Count > 0) {
                     Console.WriteLine("Ignored: ");
-                    foreach (var aWord in resultObject.Ignored)
+                    foreach (var aWord in searchResult.Ignored)
                     {
                         Console.WriteLine(aWord + ", ");
                     }
                 }
 
                 int idx = 0;
-                foreach (var doc in resultObject.DocumentHits) {
+                foreach (var doc in searchResult.DocumentHits) {
                     Console.WriteLine("" + (idx+1) + ": " + doc.Document.mUrl + " -- contains " + doc.NoOfHits + " search terms");
                     Console.WriteLine("Index time: " + doc.Document.mIdxTime + ". Creation time: " + doc.Document.mCreationTime);
                     Console.WriteLine();
                     idx++;
                 }
-                Console.WriteLine("Documents: " + resultObject.Hits + ". Time: " + resultObject.TimeUsed.TotalMilliseconds);
+                Console.WriteLine("Documents: " + searchResult.Hits + ". Time: " + searchResult.TimeUsed.TotalMilliseconds);
             }
         }
     }
