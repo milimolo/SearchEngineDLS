@@ -15,7 +15,7 @@ namespace ConsoleSearch
 
         [HttpGet]
         [Route("{query}")]
-        public ActionResult<SearchResult> GetSearchResult( string query)
+        public IActionResult GetSearchResult( string query)
         {
             //string[] array = new string[2] { "the", "peter" };
             return Ok(mSearchLogic.Search(query.Split(","), 10));
