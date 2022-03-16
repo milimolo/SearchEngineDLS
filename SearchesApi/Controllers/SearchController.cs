@@ -1,10 +1,12 @@
 ﻿using ConsoleSearch.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
+using System.Threading;
 
 namespace ConsoleSearch
 {
     [ApiController]
-    [Route("search")]
+    [Route("[controller]")]
     public class SearchController : ControllerBase
     {
         SearchService mSearchLogic;
@@ -17,8 +19,9 @@ namespace ConsoleSearch
         [Route("{query}")]
         public IActionResult GetSearchResult( string query)
         {
-            //string[] array = new string[2] { "the", "peter" };
-            return Ok(mSearchLogic.Search(query.Split(","), 10));
+            var result = mSearchLogic.Search(query.Split(","), 10);
+            var resultStr = JsonSerializer.Serialize(result);
+            return Ok(resultStr);
         }
     }
 }

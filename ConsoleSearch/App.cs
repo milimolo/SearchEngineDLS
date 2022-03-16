@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CommonStuff.BE;
+using System;
 using System.Net.Http;
 using System.Text.Json;
 
@@ -26,10 +26,9 @@ namespace ConsoleSearch
 
                 var query = input.Split(" ", StringSplitOptions.RemoveEmptyEntries);
 
-                var response = _client.GetAsync("https://localhost:44395/search/"+ string.Join(",", query));
+                var response = _client.GetAsync("https://localhost:5001/load/search/" + string.Join(",", query));
 
-                string result = (response.Result.Content.ReadAsStringAsync().Result);
-
+                string result = response.GetAwaiter().GetResult().Content.ReadAsStringAsync().Result;
                 var searchResult = JsonSerializer.Deserialize<SearchResult>(result);
 
                 if (searchResult.Ignored.Count > 0) {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace ConsoleSearch
+namespace CommonStuff.BE
 {
     /*
      * A data class representing the result of a search.
@@ -14,8 +14,6 @@ namespace ConsoleSearch
      */
     public class SearchResult
     {
-        //[JsonConstructor]
-        //public SearchResult() { }
         public SearchResult(String[] query, int hits, List<DocumentHit> documentHits, List<string> ignored, TimeSpan timeUsed)
         {
             Query = query;

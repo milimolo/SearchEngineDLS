@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommonStuff.BE;
+using System;
 using System.Collections.Generic;
 
 namespace ConsoleSearch.Services
