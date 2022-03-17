@@ -22,6 +22,7 @@ namespace SearchesApi
             services.AddControllers()
                     .AddJsonOptions(options => 
                         options.JsonSerializerOptions.Converters.Add(new JsonTimeSpanConverter()));
+            services.AddSwaggerGen();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,6 +36,7 @@ namespace SearchesApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseSwagger();
 
             app.UseAuthorization();
 

@@ -26,6 +26,7 @@ namespace Indexer
             Execute("DROP TABLE IF EXISTS Occ");
 
             Execute("DROP TABLE IF EXISTS document");
+            Execute("DROP TABLE IF EXISTS logger");
             Execute("CREATE TABLE document(id INTEGER PRIMARY KEY, url TEXT, idxTime TEXT, creationTime TEXT)");
 
             Execute("DROP TABLE IF EXISTS word");
@@ -34,6 +35,8 @@ namespace Indexer
             Execute("CREATE TABLE Occ(wordId INTEGER, docId INTEGER, "
                   + "FOREIGN KEY (wordId) REFERENCES word(id), "
                   + "FOREIGN KEY (docId) REFERENCES document(id))");
+
+            Execute("CREATE TABLE logger(id INTEGER PRIMARY KEY, startTime TEXT, endTime TEXT, word TEXT)");
             //Execute("CREATE INDEX word_index ON Occ (wordId)");
         }
 

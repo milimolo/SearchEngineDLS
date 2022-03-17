@@ -44,10 +44,10 @@ namespace SearchLoadBalancer.Controllers
 
         [HttpGet]
         [Route("{query}")]
-        public IActionResult Get(string query)
+        public async Task<IActionResult> Get(string query)
         {
-            var response = client.GetAsync("search/" + string.Join(",",query));
-            var result = response.GetAwaiter().GetResult().Content.ReadAsStringAsync().Result;
+            var response = await client.GetAsync("search/" + string.Join(",",query));
+            var result = response.Content.ReadAsStringAsync().Result;
             var SearchResult = JsonSerializer.Deserialize<SearchResult>(result);
             var resultStr = JsonSerializer.Serialize(SearchResult);
             Console.WriteLine("Succesfully completed call on URL: " + client.BaseAddress + "search/" + string.Join(",", query));

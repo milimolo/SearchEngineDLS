@@ -18,6 +18,11 @@ namespace ConsoleSearch
 
         }
 
+        public Logger AddLog(Logger log)
+        {
+            return mDatabase.AddLog(log);
+        }
+
         /* Perform search of documents containing words from query. The result will
          * contain details about amost maxAmount of documents.
          */
@@ -64,7 +69,5 @@ namespace ConsoleSearch
             outIgnored = ignored;
             return res;
         }
-
-       
     }
 }

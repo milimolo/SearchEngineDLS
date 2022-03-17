@@ -133,5 +133,38 @@ ORDER BY COUNT(docId) DESC;
             }
             return res;
         }
+
+        public Logger AddLog(Logger logger)
+        {
+            using (var transaction = _connection.BeginTransaction())
+            {
+                var selectCmd = _connection.CreateCommand();
+                selectCmd.CommandText = @"INSERT INTO logger(startTime, endTime, word) VALUES(@startTime,@endTime,@word)";
+
+                //var paramId = selectCmd.CreateParameter();
+                //paramId.ParameterName = "id";
+                //selectCmd.Parameters.Add(paramId);
+
+                var paramStartTime = selectCmd.CreateParameter();
+                paramStartTime.ParameterName = "startTime";
+                selectCmd.Parameters.Add(paramStartTime);
+
+                var paramEndTime = selectCmd.CreateParameter();
+                paramEndTime.ParameterName = "endTime";
+                selectCmd.Parameters.Add(paramEndTime);
+
+                var paramWord = selectCmd.CreateParameter();
+                paramWord.ParameterName = "word";
+                selectCmd.Parameters.Add(paramWord);
+
+                paramStartTime.Value = logger.StartTime;
+                paramEndTime.Value = logger.EndTime;
+                paramWord.Value = logger.Word;
+                selectCmd.ExecuteNonQuery();
+
+                transaction.Commit();
+            }
+            return logger;
+        }
     }
 }
