@@ -31,7 +31,6 @@ namespace ConsoleSearch
 
                     task1.Start();
                     task2.Start();
-                    //TestSearches(_client);
                 }
                 else
                 {

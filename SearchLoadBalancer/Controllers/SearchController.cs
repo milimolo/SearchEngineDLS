@@ -48,10 +48,8 @@ namespace SearchLoadBalancer.Controllers
         {
             var response = await client.GetAsync("search/" + string.Join(",",query));
             var result = response.Content.ReadAsStringAsync().Result;
-            var SearchResult = JsonSerializer.Deserialize<SearchResult>(result);
-            var resultStr = JsonSerializer.Serialize(SearchResult);
             Console.WriteLine("Succesfully completed call on URL: " + client.BaseAddress + "search/" + string.Join(",", query));
-            return Ok(resultStr);
+            return Ok(result);
         }
     }
 }
