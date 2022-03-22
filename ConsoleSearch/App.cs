@@ -2,6 +2,7 @@
 using System;
 using System.Net.Http;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace ConsoleSearch
 {
@@ -25,7 +26,12 @@ namespace ConsoleSearch
                 if (input.Equals("q")) break;
                 if (input.Equals("0"))
                 {
-                    TestSearches(_client);
+                    var task1 = new Task(() => TestSearches(_client));
+                    var task2 = new Task(() => TestSearches(_client));
+
+                    task1.Start();
+                    task2.Start();
+                    //TestSearches(_client);
                 }
                 else
                 {
@@ -63,7 +69,7 @@ namespace ConsoleSearch
             string[] words = { "the", "man", "boy", "day", "night", "lady", "a", "i", "do", "what", "to", "let", "wet", "get", "who", "why", "leave", "milk", "food" };
             Random rnd = new Random();
 
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < 50; i++)
             {
                 int index = rnd.Next(words.Length);
                 await client.GetAsync("https://localhost:5001/load/search/" + string.Join(",", words[index]));

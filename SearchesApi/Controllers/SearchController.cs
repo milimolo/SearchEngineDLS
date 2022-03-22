@@ -20,7 +20,7 @@ namespace ConsoleSearch
 
         [HttpGet]
         [Route("{query}")]
-        public Task<IActionResult> GetSearchResult( string query)
+        public IActionResult GetSearchResult( string query)
         {
             string startTime = DateTime.UtcNow.ToString("HH:mm:ss.fff");
             var result = mSearchLogic.Search(query.Split(","), 10);
