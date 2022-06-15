@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CommonStuff.BE;
 using ConsoleSearch.Services;
+using SearchAPI.Controllers;
 
 namespace ConsoleSearch
 {
@@ -11,10 +12,14 @@ namespace ConsoleSearch
 
         Dictionary<string, int> mWords;
 
+        ResultCache mCache;
+
         public SearchService(Database database)
         {
             mDatabase = database;
             mWords = mDatabase.GetAllWords();
+
+            mCache = new ResultCache();
 
         }
 
@@ -28,9 +33,21 @@ namespace ConsoleSearch
          */
         public SearchResult Search(String[] query, int maxAmount)
         {
-            List<string> ignored;
-
             DateTime start = DateTime.Now;
+
+            Array.Sort(query);
+            var queryString = String.Join(',', query);
+            var result = mCache.GetValue(queryString);
+            if (result != null)
+            {
+                Console.WriteLine("Cache hit: " + queryString);
+                result.TimeUsed = DateTime.Now - start;
+                return result;
+            }
+            else
+                Console.WriteLine("NO cachehit: " + queryString);
+
+            List<string> ignored;
 
             // Convert words to wordids
             var wordIds = GetWordIds(query, out ignored);
@@ -51,14 +68,23 @@ namespace ConsoleSearch
                 docresult.Add(new DocumentHit(doc, docIds[idx++].Value));
 
 
-            return new SearchResult(query, docIds.Count, docresult, ignored, DateTime.Now - start);
+            result = new SearchResult(
+                query, 
+                docIds.Count,
+                docresult, 
+                ignored, 
+                DateTime.Now - start);
+
+            mCache.Add(queryString, result);
+
+            return result;
         }
 
         private List<int> GetWordIds(String[] query, out List<string> outIgnored)
         {
             var res = new List<int>();
             var ignored = new List<string>();
-            
+            Array.Sort(query);
             foreach (var aWord in query)
             {
                 if (mWords.ContainsKey(aWord))

@@ -1,11 +1,7 @@
 ﻿using CommonStuff.BE;
-using ConsoleSearch.Services;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
-using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace ConsoleSearch
 {
@@ -13,11 +9,7 @@ namespace ConsoleSearch
     [Route("[controller]")]
     public class SearchController : ControllerBase
     {
-        SearchService mSearchLogic;
-        public SearchController()
-        {
-            mSearchLogic = new SearchService(new Database());
-        }
+        private static SearchService mSearchLogic = new SearchService(new Database());
 
         [HttpGet]
         [Route("{query}")]
@@ -41,7 +33,7 @@ namespace ConsoleSearch
             };
 
             var log = mSearchLogic.AddLog(logger);
-            Console.WriteLine(log.Word + " was searched on between " + log.StartTime + " and " + log.EndTime);
+            //Console.WriteLine(log.Word + " was searched on between " + log.StartTime + " and " + log.EndTime);
 
             return JsonConvert.SerializeObject(result, Formatting.Indented);
         }
