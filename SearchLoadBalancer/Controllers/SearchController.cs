@@ -1,12 +1,7 @@
-﻿using CommonStuff.BE;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace SearchLoadBalancer.Controllers
 {
@@ -44,10 +39,10 @@ namespace SearchLoadBalancer.Controllers
 
         [HttpGet]
         [Route("{query}")]
-        public async Task<IActionResult> Get(string query)
+        public IActionResult Get(string query)
         {
-            var response = await client.GetAsync("search/" + string.Join(",",query));
-            var result = response.Content.ReadAsStringAsync().Result;
+            var response = client.GetAsync("search/" + string.Join(",",query));
+            var result = response.Result.Content.ReadAsStringAsync().Result;
             Console.WriteLine("Succesfully completed call on URL: " + client.BaseAddress + "search/" + string.Join(",", query));
             return Ok(result);
         }

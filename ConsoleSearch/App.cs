@@ -1,4 +1,5 @@
 ﻿using CommonStuff.BE;
+using Newtonsoft.Json;
 using System;
 using System.Net.Http;
 using System.Text.Json;
@@ -38,8 +39,8 @@ namespace ConsoleSearch
 
                     var response = _client.GetAsync("https://localhost:5001/load/search/" + string.Join(",", query));
 
-                    string result = await response.Result.Content.ReadAsStringAsync();
-                    var searchResult = JsonSerializer.Deserialize<SearchResult>(result);
+                    string result = response.Result.Content.ReadAsStringAsync().Result;
+                    var searchResult = JsonConvert.DeserializeObject<SearchResult>(result);
 
                     if (searchResult.Ignored.Count > 0)
                     {
@@ -62,6 +63,8 @@ namespace ConsoleSearch
                 }
             }
         }
+
+
 
         private async void TestSearches(HttpClient client)
         {
